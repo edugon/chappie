@@ -1,0 +1,8 @@
+{
+	"name": "greeter-bot",
+	"version": "1.0.0",
+	"description": "Discord chat bot",
+	"main": "bot.js",
+	"author": "eduu",
+	"dependencies": {}
+}
