@@ -23,7 +23,7 @@ bot.on('ready', function (evt) {
 
 bot.on("guildMemberAdd", function (member) {
   console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
-  member.guild.channels.get("putoscasual").send(`Hello World! "${member.user.username}" ` +
+  member.guild.channels.get("putoscasual").send(`Hello World! ${member.user.username} ` +
     `just joined... Welcome! come in and wash the dishes hehe regards`);
 });
 
@@ -40,7 +40,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
             case 'regards':
                 bot.sendMessage({
                     to: channelID,
-                    message: `Heey yoooo "${user.username}"! Regards!!`
+                    message: `Heey yooo ${user}! Regards!`
                 });
             break;
             // Just add any case commands if you want to..
