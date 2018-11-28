@@ -21,7 +21,7 @@ bot.on('ready', function (evt) {
     logger.info(bot.username + ' - (' + bot.id + ')');
 });
 
-client.on("guildMemberAdd", function (member) {
+bot.on("guildMemberAdd", function (member) {
   console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
   member.guild.channels.get("putoscasual").send(`Hello World! "${member.user.username}" ` +
     `just joined... Welcome! come in and wash the dishes hehe regards`);
