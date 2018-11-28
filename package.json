@@ -5,7 +5,8 @@
 	"main": "bot.js",
 	"author": "eduu",
 	"dependencies": {
-	    "discord.io": "latest",
+	    # v5 is deprecated :(
+	    "discord.io": "github:woor/discord.io#gateway_v6",
 	    "winston": "latest"
 	}
 }
