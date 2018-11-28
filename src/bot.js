@@ -10,40 +10,38 @@ logger.add(new logger.transports.Console, {
 logger.level = 'debug';
 
 // Initialize Discord Bot
-var bot = new Discord.Client({
+var chappie = new Discord.Client({
    token: auth.token,
    autorun: true
 });
 
-bot.on('ready', function (evt) {
-    logger.info('Connected');
-    logger.info('Logged in as: ');
-    logger.info(bot.username + ' - (' + bot.id + ')');
+chappie.on('ready', function (evt) {
+    logger.info('Logged in as: ' + chappie.username + ' - (' + chappie.id + ')');
+    console.log('chappie is ready');
 });
 
-bot.on("guildMemberAdd", function (member) {
+chappie.on("guildMemberAdd", function (member) {
   console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
   member.guild.channels.get("putoscasual").send(`Hello World! ${member.user.username} ` +
     `just joined... Welcome! come in and wash the dishes hehe regards`);
 });
 
-bot.on('message', function (user, userID, channelID, message, evt) {
-    // Our bot needs to know if it will execute a command
-    // It will listen for messages that will start with `!`
+chappie.on('message', function (user, userID, channelID, message, evt) {
+    // chappie needs to know if it will execute a command
+    // it will listen for messages that will start with `!`
     if (message.substring(0, 1) == '!') {
         var args = message.substring(1).split(' ');
         var cmd = args[0];
        
         args = args.splice(1);
         switch(cmd) {
-            // !regards
-            case 'regards':
-                bot.sendMessage({
+            // !heychappie
+            case 'heychappie':
+                chappie.sendMessage({
                     to: channelID,
                     message: `Heey yooo ${user}! Regards!`
                 });
             break;
-            // Just add any case commands if you want to..
          }
      }
 })
