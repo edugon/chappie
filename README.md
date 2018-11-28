@@ -14,3 +14,5 @@ Chappie is just a chatbot for discord servers :)
 2. Build Docker image: ``$ docker build -t chappie .``.
 3. Run Docker container: ``$ docker run --name chappie chappie``.
 4. Enjoy! :)
+
+> If you are not using Docker, just run: ``$ npm install && node bot.js``
