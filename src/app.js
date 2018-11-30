@@ -1,36 +1,57 @@
-const Discord = require("discord.js"),
+const Discord = require('discord.js'),
 	logger = require('winston'),
 	chappie = new Discord.Client(),
-	config = require("./config.json");
+	config = require('./config.json'),
+	defaultChannel = 'development'; // my dev channel
 
 chappie.on("ready", function() {
 	console.log({users: chappie.users.size, channels: chappie.channels.size});
     console.log('chappie is listening');
 });
 
-/*chappie.on("guildCreate", guild => {
-  	// This event triggers when the bot joins a guild.
+chappie.on("guildCreate", function(guild) {
+  	// this event triggers when chappie joins a guild.
   	console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-  	chappie.user.setActivity(`Serving ${chappie.guilds.size} servers`);
+  	let channel = guild.channels.find(ch => ch.name === defaultChannel);
+  	channel.startTyping();
+    let embed = new Discord.RichEmbed()
+        .setColor('DARK_GREEN')
+        .setTitle('Hey there!')
+        .setDescription(`Hello World! My name is chappie, nice to meet you all! :sunglasses:`)
+        .setImage('https://media2.giphy.com/media/pjZLhQIEx9dBe/giphy.gif')
+        .setFooter(':thought_balloon: Type "!chappie info" to know more about me');
+    channel.stopTyping(true);
+    channel.send(embed);
 });
 
-chappie.on("guildDelete", guild => {
-  	// this event triggers when the bot is removed from a guild.
+chappie.on("guildDelete", function(guild) {
+  	// this event triggers when chappie is removed from a guild.
   	console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
-  	chappie.user.setActivity(`Serving ${chappie.guilds.size} servers`);
-});*/
+  	let channel = guild.channels.find(ch => ch.name === defaultChannel);
+  	channel.startTyping();
+    let embed = new Discord.RichEmbed()
+        .setColor('DARK_RED')
+        .setTitle('Farewell :(')
+        .setDescription(`Hey all, I'm leaving this guild... Nice to meet you people! :sob:`)
+        .setImage('https://media.giphy.com/media/KWjRQ4Zttlzb2/giphy.gif')
+        .setFooter(':thought_balloon: Add me again whenever you want');
+    channel.stopTyping(true);
+    channel.send(embed);
+});
 
 chappie.on("guildMemberAdd", function(member) {
+    // this event triggers when new member is added to the guild.
     console.log(`New User "${member.displayName}" has joined "${member.guild.name}"` );
-    let channel = member.guild.channels.find(ch => ch.name === 'putoscasual');
+    let channel = member.guild.channels.find(ch => ch.name === defaultChannel);
     if(channel) {
         channel.startTyping();
         let embed = new Discord.RichEmbed()
             .setColor('DARK_GREEN')
+            .setTitle('Greetings!')
             .setDescription(`Hello World! ${member} ` +
         	    `just joined... Welcome! come in and wash the dishes hehe regards :joy: :joy:`)
-            .setImage('https://media2.giphy.com/media/pjZLhQIEx9dBe/giphy-downsized.gif')
-            .setFooter('Type "!chappie info" to know more about me');
+            .setImage('https://media2.giphy.com/media/pjZLhQIEx9dBe/giphy.gif')
+            .setFooter(':thought_balloon: Type "!chappie info" to know more about me');
         channel.stopTyping(true);
         channel.send(embed);
     }
@@ -44,17 +65,13 @@ function guessResponse(args, message) {
             phrase.join();
             phrase = phrase.toString().replace(",", " ");
             message.channel.startTyping();
-            embed.setColor('DARK_GREEN')
-                .setDescription(`${phrase} :grimacing:`);
+            message.channel.send(`${phrase} :grimacing:`);
             message.channel.stopTyping(true);
-            message.channel.send(embed);
         break;
         default: 
         	message.channel.startTyping();
-        	embed.setColor('DARK_RED')
-        		.setDescription(`What are you trying to say? :thinking:`);
+        	message.channel.send(`What are you trying to say? :thinking:`);
         	message.channel.stopTyping(true);
-        	message.channel.send(embed);
         break;
     }
 }
@@ -73,11 +90,14 @@ chappie.on("message", function(message) {
                 if(args.length > 0) {
                     guessResponse(args, message)
                 } else {
+                    // default message
                 	message.channel.startTyping();
                 	let embed = new Discord.RichEmbed()
                 		.setColor('DARK_GREEN')
+                		.setTitle('Hey there!')
                 		.setDescription('Heey yooo ' + message.author + '! Regards! :thumbsup:')
-                		.setImage('https://media2.giphy.com/media/pjZLhQIEx9dBe/giphy-downsized.gif');
+                		.setImage('https://media2.giphy.com/media/pjZLhQIEx9dBe/giphy.gif')
+                		.setFooter(':thought_balloon: Type "!chappie info" to know more about me');
                     message.channel.stopTyping(true);
                     message.channel.send(embed);
                 }
