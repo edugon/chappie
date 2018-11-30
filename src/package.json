@@ -2,7 +2,7 @@
 	"name": "discord-bot",
 	"version": "1.0.0",
 	"description": "chappie :)",
-	"main": "bot2.js",
+	"main": "app.js",
 	"author": "eduu",
 	"dependencies": {
 	    "discord.js": "latest",
