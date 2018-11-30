@@ -19,7 +19,7 @@ chappie.on("guildCreate", function(guild) {
         .setTitle('Hey there!')
         .setDescription(`Hello World! My name is chappie, nice to meet you all! :sunglasses:`)
         .setImage('https://media2.giphy.com/media/pjZLhQIEx9dBe/giphy.gif')
-        .setFooter(':thought_balloon: Type "!chappie info" to know more about me');
+        .setFooter('Type "!chappie info" to know more about me');
     channel.stopTyping(true);
     channel.send(embed);
 });
@@ -34,7 +34,7 @@ chappie.on("guildDelete", function(guild) {
         .setTitle('Farewell :(')
         .setDescription(`Hey all, I'm leaving this guild... Nice to meet you people! :sob:`)
         .setImage('https://media.giphy.com/media/KWjRQ4Zttlzb2/giphy.gif')
-        .setFooter(':thought_balloon: Add me again whenever you want');
+        .setFooter('Add me again whenever you want');
     channel.stopTyping(true);
     channel.send(embed);
 });
@@ -51,7 +51,7 @@ chappie.on("guildMemberAdd", function(member) {
             .setDescription(`Hello World! ${member} ` +
         	    `just joined... Welcome! come in and wash the dishes hehe regards :joy: :joy:`)
             .setImage('https://media2.giphy.com/media/pjZLhQIEx9dBe/giphy.gif')
-            .setFooter(':thought_balloon: Type "!chappie info" to know more about me');
+            .setFooter('Type "!chappie info" to know more about me');
         channel.stopTyping(true);
         channel.send(embed);
     }
@@ -94,10 +94,10 @@ chappie.on("message", function(message) {
                 	message.channel.startTyping();
                 	let embed = new Discord.RichEmbed()
                 		.setColor('DARK_GREEN')
-                		.setTitle('Hey there!')
+                		.setTitle('chappie says:')
                 		.setDescription('Heey yooo ' + message.author + '! Regards! :thumbsup:')
                 		.setImage('https://media2.giphy.com/media/pjZLhQIEx9dBe/giphy.gif')
-                		.setFooter(':thought_balloon: Type "!chappie info" to know more about me');
+                		.setFooter('Type "!chappie info" to know more about me');
                     message.channel.stopTyping(true);
                     message.channel.send(embed);
                 }
