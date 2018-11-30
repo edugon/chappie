@@ -1,7 +1,7 @@
 {
-	"name": "discord-bot",
+	"name": "chappie",
 	"version": "1.0.0",
-	"description": "chappie :)",
+	"description": "just chappie :)",
 	"main": "app.js",
 	"author": "eduu",
 	"dependencies": {
