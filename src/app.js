@@ -70,6 +70,7 @@ function guessResponse(args, message) {
         default: 
         	message.channel.startTyping();
         	message.channel.send(`What are you trying to say? :thinking:`);
+        	message.channel.send(`Type "!chappie info" to know more about me`);
         	message.channel.stopTyping(true);
         break;
     }
