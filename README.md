@@ -1,4 +1,6 @@
 # chappie
+![discordapp](https://discordapp.com/api/guilds/222078108977594368/embed.png)
+
 This document describes the deployment and functioning of chappie.
 
 ### About

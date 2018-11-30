@@ -1,11 +1,11 @@
 {
 	"name": "discord-bot",
 	"version": "1.0.0",
-	"description": "Discord chat bot",
-	"main": "bot.js",
+	"description": "chappie :)",
+	"main": "bot2.js",
 	"author": "eduu",
 	"dependencies": {
-	    "discord.io": "github:woor/discord.io#gateway_v6",
+	    "discord.js": "latest",
 	    "winston": "latest"
 	}
 }
