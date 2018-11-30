@@ -1,5 +1,5 @@
 FROM node:latest
-LABEL description="this image builds node discord chatbot"
+LABEL description="this image builds chappie :)"
 
 # use changes to package.json to force docker not to use the cache
 # this is more efficient as we avoid reinstalling all packages in every build.
