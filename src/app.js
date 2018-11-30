@@ -22,15 +22,18 @@ chappie.on("guildDelete", guild => {
 
 chappie.on("guildMemberAdd", function(member) {
     console.log(`New User "${member.displayName}" has joined "${member.guild.name}"` );
-    'https://media2.giphy.com/media/pjZLhQIEx9dBe/giphy-downsized.gif'
-
-    let embed = new Discord.RichEmbed()
-        .setColor('DARK_GREEN')
-        .setDescription(`Hello World! ${member.user.username} ` +
-        	`just joined... Welcome! come in and wash the dishes hehe regards :joy: :joy:`)
-        .setImage('https://media2.giphy.com/media/pjZLhQIEx9dBe/giphy-downsized.gif')
-        .setFooter('Type "!chappie info" to know more about me');
-    member.guild.channels.find('name', 'putoscasual').send(embed);
+    let channel = member.guild.channels.find(ch => ch.name === 'putoscasual');
+    if(channel) {
+        channel.startTyping();
+        let embed = new Discord.RichEmbed()
+            .setColor('DARK_GREEN')
+            .setDescription(`Hello World! ${member} ` +
+        	    `just joined... Welcome! come in and wash the dishes hehe regards :joy: :joy:`)
+            .setImage('https://media2.giphy.com/media/pjZLhQIEx9dBe/giphy-downsized.gif')
+            .setFooter('Type "!chappie info" to know more about me');
+        channel.stopTyping(true);
+        channel.send(embed);
+    }
 });
 
 function guessResponse(args, message) {
