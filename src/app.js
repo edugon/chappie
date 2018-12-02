@@ -74,6 +74,18 @@ function guessResponse(args, message) {
             message.channel.stopTyping(true);
             message.channel.send(embed);
         break;
+        case 'steam':
+            message.channel.startTyping();
+            steamClient.getNews(730, 5, 300)
+            .then(function(response) {
+                console.log(response);
+            })
+            .catch(function(error) {
+                console.error(error);
+            });
+            message.channel.stopTyping(true);
+            //message.channel.send(embed);
+        break;
         default: 
         	message.channel.startTyping();
         	message.channel.send(`What are you trying to say? :thinking:`);
