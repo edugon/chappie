@@ -12,15 +12,22 @@ exports.gifs = {
 }
 
 exports.footers = {
-	INFO: 'Type "!chappie info" to know more about me 😊';
+	INFO: 'Type "!chappie info" to know more about me 😊',
+	WIP: 'This may change in the future ☝',
+	MAINTAINER: 'I have been developed by eduu <shockeR>'
 }
 
-exports.createEmbed = function(title, color, description, image, footer) {
+exports.createEmbed = function(title, author, avatar, color, description, image, 
+	footer, thumbnail) {
 	let embed = new Discord.RichEmbed()
-		.setTitle(title)
-		.setColor(color)
-		.setDescription(description)
-		.setImage(image)
-		.setFooter(footer);
+		.setTitle(title != null ? title : '')
+		.setAuthor(author != null ? author + ' says:' : '', avatar != null ? avatar : '')
+		.setColor(color != null ? color : '')
+		.setDescription(description != null ? description : '')
+		.setImage(image != null ? image : '')
+		.setFooter(footer != null ? footer : '')
+		.setThumbnail(thumbnail != null ? thumbnail : '')
+		.setTimestamp();
+
 	return embed;
 }
