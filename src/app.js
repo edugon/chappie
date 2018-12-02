@@ -3,7 +3,7 @@ const Discord = require('discord.js'),
 	chappie = new Discord.Client(),
 	config = require('./config.json'),
     utils = require('./utils.js'),
-	defaultChannel = 'development'; // my dev channel
+	defaultChannel = 'development'; // dev channel
 
 chappie.on("ready", function() {
 	console.log({users: chappie.users.size, channels: chappie.channels.size});
@@ -16,10 +16,10 @@ chappie.on("guildCreate", function(guild) {
   	let channel = guild.channels.find(ch => ch.name === defaultChannel);
   	channel.startTyping();
 
-    let embed = utils.createRichEmbed('Hey there!', 'DARK_GREEN', 
+    let embed = utils.createEmbed('Hey there!', utils.colors.DARK_GREEN, 
         'Hello World! My name is chappie, nice to meet you all! :sunglasses:',
-        'https://media2.giphy.com/media/pjZLhQIEx9dBe/giphy.gif', 
-        'Type "!chappie info" to know more about me 😊');
+        utils.gifs.REGARDS, 
+        utils.footers.INFO);
     channel.stopTyping(true);
     channel.send(embed);
 });
@@ -29,9 +29,9 @@ chappie.on("guildDelete", function(guild) {
   	console.log(`i have been removed from: ${guild.name} (id: ${guild.id})`);
   	let channel = guild.channels.find(ch => ch.name === defaultChannel);
   	channel.startTyping();
-    let embed = utils.createRichEmbed('Farewell 😔', 'DARK_RED', 
+    let embed = utils.createEmbed('Farewell 😔', utils.colors.DARK_RED, 
         `Hey all, I'm leaving this guild... Nice to meet you people! :sob:`, 
-        'https://media.giphy.com/media/KWjRQ4Zttlzb2/giphy.gif');
+        utils.gifs.WALKING);
     channel.stopTyping(true);
     channel.send(embed);
 });
@@ -42,11 +42,11 @@ chappie.on("guildMemberAdd", function(member) {
     let channel = member.guild.channels.find(ch => ch.name === defaultChannel);
     if(channel) {
         channel.startTyping();
-        let embed = utils.createRichEmbed('Greetings!', 'DARK_GREEN', 
+        let embed = utils.createEmbed('Greetings!', utils.colors.DARK_GREEN, 
             `Hello World! ${member} ` + 
             `just joined... Welcome! come in and wash the dishes hehe regards :joy: :joy:`, 
-            'https://media2.giphy.com/media/pjZLhQIEx9dBe/giphy.gif', 
-            'Type "!chappie info" to know more about me 😊');
+            utils.gifs.REGARDS, 
+            utils.footers.INFO);
         channel.stopTyping(true);
         channel.send(embed);
     }
@@ -64,16 +64,16 @@ function guessResponse(args, message) {
             message.channel.stopTyping(true);
         break;
         case 'info':
-            message.channel.startTyping();
+            //message.channel.startTyping();
             //message.channel.send(`!chappie`);
             //message.channel.send(`!chappie say <whatever>`);
             //message.channel.send(`!chappie info`);
-            message.channel.stopTyping(true);
+            //message.channel.stopTyping(true);
         break;
         default: 
         	message.channel.startTyping();
         	message.channel.send(`What are you trying to say? :thinking:`);
-        	message.channel.send(`Type "!chappie info" to know more about me`);
+        	message.channel.send(utils.footers.INFO);
         	message.channel.stopTyping(true);
         break;
     }
@@ -95,10 +95,10 @@ chappie.on("message", function(message) {
                 } else {
                     // default message
                 	message.channel.startTyping();
-                	let embed = utils.createRichEmbed('chappie says:', 'DARK_GREEN', 
+                	let embed = utils.createEmbed('chappie says:', utils.colors.DARK_GREEN, 
                         'Heey yooo ' + message.author + '! Regards! :thumbsup:', 
-                        'https://media2.giphy.com/media/pjZLhQIEx9dBe/giphy.gif', 
-                        'Type "!chappie info" to know more about me 😊');
+                        utils.gifs.REGARDS, 
+                        utils.footers.INFO);
                     message.channel.stopTyping(true);
                     message.channel.send(embed);
                 }
