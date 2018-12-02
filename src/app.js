@@ -3,6 +3,7 @@ const Discord = require('discord.js'),
 	chappie = new Discord.Client(),
 	config = require('./config.json'),
     utils = require('./utils.js'),
+    steamClient = require('./clients/steamClient.js'),
 	defaultChannel = 'development'; // dev channel
 
 chappie.on("ready", function() {
@@ -64,11 +65,15 @@ function guessResponse(args, message) {
             message.channel.stopTyping(true);
         break;
         case 'info':
-            //message.channel.startTyping();
-            //message.channel.send(`!chappie`);
-            //message.channel.send(`!chappie say <whatever>`);
-            //message.channel.send(`!chappie info`);
-            //message.channel.stopTyping(true);
+            
+        break;
+        case 'steam':
+            // just showing response, TODO: need to extend
+            steamClient.getNews(730, 5, 300).then(function(appnews) {
+                console.log(appnews);
+            }, function(error) {
+                console.error(error);
+            });
         break;
         default: 
         	message.channel.startTyping();

@@ -12,7 +12,7 @@ exports.gifs = {
 }
 
 exports.footers = {
-	INFO: 'Type "!chappie info" to know more about me 😊';
+	INFO: 'Type "!chappie info" to know more about me 😊'
 }
 
 exports.createEmbed = function(title, color, description, image, footer) {
