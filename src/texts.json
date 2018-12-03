@@ -1,0 +1,54 @@
+{
+	"english": {
+		"titles": {
+			"greetings": "Greetings!",
+			"heyThere": "Hey there!",
+			"farewell": "Farewell :(",
+			"help": "Basic commands: ",
+			"regards": "Regards! :thumbsup:",
+			"say": " says:",
+			"lang": "Languages:"
+		}, 
+		"fields": {
+			"helloWorld": "Hello World! My name is chappie, nice to meet you all! :sunglasses:",
+			"farewell": "Hey all, I'm leaving this guild... Nice to meet you people! :sob:",
+			"about": "Hey there! I am chappie, just a chatbot for Discord.",
+			"wrongInput": "What are you trying to say? :thinking:",
+			"memberAdd": "just joined... Welcome! come in and wash the dishes hehe regards :joy: :joy:",
+			"help": "1. Type '!chappie say <your words>' and I will repeat.\n2. Type '!chappie steam' to get news from Steam.",
+			"language": "OK! Lets speak english! :yum:",
+			"lang": "Type '!chappie <english|español>' to change my language."
+		},
+		"footers": {
+			"info": "Type '!chappie info' to know more about me 😊",
+			"wip": "This may change in the future ☝",
+			"maintainer": "I have been developed by eduu <shockeR>"
+		}
+	},
+	"spanish": {
+		"titles": {
+			"greetings": "¡Bienvenido!",
+			"heyThere": "¡Esa gente!",
+			"farewell": "Hasta luego :(",
+			"help": "Comandos básicos: ",
+			"regards": "Saludos! :thumbsup:",
+			"say": " dice:",
+			"lang": "Idiomas:"
+		}, 
+		"fields": {
+			"helloWorld": "Hola Mundo! Mi nombre es chappie, encantado! :sunglasses:",
+			"farewell": "Hey, Me marcho de este server... Encantado de conoceros gente! :sob:",
+			"about": "¡Encantado! Soy chappie, un chatbot de Discord.",
+			"wrongInput": "¿Qué intentas decir? :thinking:",
+			"memberAdd": "acaba de unirse... Bienvenido! pasa y frega los platos JAJA SALUDOS :joy: :joy:",
+			"help": "1. Escribe '!chappie say <your words>' y repetiré la frase.\n2. Escribe '!chappie steam' para consultar noticias de Steam.",
+			"language": "¡Vale! Hablamos en castellano :yum:",
+			"lang": "Escribe '!chappie <english|español> para cambiar mi idioma."
+		},
+		"footers": {
+			"info": "Escribe '!chappie info' para saber más sobre mí 😊",
+			"wip": "Esto podría cambiar en el futuro ☝",
+			"maintainer": "He sido desarrollado por eduu <shockeR>"
+		}
+	}
+}
