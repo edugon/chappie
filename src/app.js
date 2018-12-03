@@ -2,51 +2,50 @@ const Discord = require('discord.js'),
 	logger = require('winston'),
 	chappie = new Discord.Client(),
 	config = require('./config.json'),
+    texts = require('./texts.json'),
     utils = require('./utils.js'),
 	defaultChannel = 'development'; // dev channel
 
 chappie.on('ready', function() {
-	console.log({users: chappie.users.size, channels: chappie.channels.size});
     console.log('chappie is listening');
+    console.log({users: chappie.users.size, channels: chappie.channels.size});
 });
 
 chappie.on('guildCreate', function(guild) {
   	// this event triggers when chappie joins a guild.
-  	console.log(`new guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
+    console.log('new guild joined');
+    console.log({guildName: guild.name, guildID: guild.id, members: guild.memberCount});
   	let channel = guild.channels.find(ch => ch.name === defaultChannel);
   	channel.startTyping();
-
     let embed = utils.createEmbed(null, chappie.user.username, chappie.user.avatarURL,
-        utils.colors.DARK_GREEN, 
-        'Hello World! My name is chappie, nice to meet you all! :sunglasses:',
-        utils.gifs.REGARDS, utils.footers.INFO, null);
+        utils.colors.DARK_GREEN, texts[config.lang].fields.helloWorld, utils.gifs.REGARDS, 
+        texts[config.lang].footers.info, null, utils.icons.INFO);
     channel.stopTyping(true);
     channel.send(embed);
 });
 
 chappie.on('guildDelete', function(guild) {
   	// this event triggers when chappie is removed from a guild.
-  	console.log(`i have been removed from: ${guild.name} (id: ${guild.id})`);
+  	console.log('removed from guild');
+    console.log({guildName: guild.name, guildID: guild.id});
   	let channel = guild.channels.find(ch => ch.name === defaultChannel);
   	channel.startTyping();
     let embed = utils.createEmbed(null, chappie.user.username, chappie.user.avatarURL, 
-        utils.colors.DARK_RED, 
-        `Hey all, I'm leaving this guild... Nice to meet you people! :sob:`, 
-        utils.gifs.WALKING, null, null);
+        utils.colors.DARK_RED, texts[config.lang].fields.farewell, utils.gifs.WALKING);
     channel.stopTyping(true);
     channel.send(embed);
 });
 
 chappie.on('guildMemberAdd', function(member) {
     // this event triggers when new member is added to the guild.
-    console.log(`new User "${member.displayName}" has joined "${member.guild.name}"` );
+    console.log('new user');
+    console.log({member: member.displayName, guild: member.guild.name});
     let channel = member.guild.channels.find(ch => ch.name === defaultChannel);
     if(channel) {
         channel.startTyping();
         let embed = utils.createEmbed(null, chappie.user.username, chappie.user.avatarURL, 
-            utils.colors.DARK_GREEN, `Hello World! ${member} ` + 
-            `just joined... Welcome! come in and wash the dishes hehe regards :joy: :joy:`, 
-            utils.gifs.REGARDS, utils.footers.INFO, null);
+            utils.colors.DARK_GREEN, `Hello World! ${member} ` + texts[config.lang].fields.memberAdd, 
+            utils.gifs.REGARDS, texts[config.lang].footers.info, null, utils.icons.INFO);
         channel.stopTyping(true);
         channel.send(embed);
     }
@@ -64,19 +63,32 @@ function guessResponse(args, message) {
         break;
         case 'info':
             message.channel.startTyping();
-            let field = '1. Type "!chappie say <your words>" and I will repeat. \n'
-                + '2. Type "!chappie steam" to get news from Steam.';
             let embed = utils.createEmbed(null, chappie.user.username, chappie.user.avatarURL, 
-                utils.colors.DARK_GREEN, 'Hey there! I am chappie, just a chatbot for Discord.', 
-                null, utils.footers.MAINTAINER, chappie.user.avatarURL)
-                .addField('Basic commands: ', field);
+                utils.colors.DARK_GREEN, texts[config.lang].fields.about, null, 
+                texts[config.lang].footers.maintainer, chappie.user.avatarURL, utils.icons.INFO)
+            .addField(texts[config.lang].titles.help, texts[config.lang].fields.help)
+            .addField(texts[config.lang].titles.lang, texts[config.lang].fields.lang);
             message.channel.stopTyping(true);
             message.channel.send(embed);
         break;
+        case 'español':
+            console.log('change language to spanish');
+            message.channel.startTyping();
+            config.lang = 'spanish';
+            message.channel.send(texts[config.lang].fields.language);
+            message.channel.stopTyping(true);
+        break;
+        case 'english':
+            console.log('change language to english');
+            message.channel.startTyping();
+            config.lang = 'english';
+            message.channel.send(texts[config.lang].fields.language);
+            message.channel.stopTyping(true);
+        break;
         default: 
         	message.channel.startTyping();
-        	message.channel.send(`What are you trying to say? :thinking:`);
-        	message.channel.send(utils.footers.INFO);
+        	message.channel.send(texts[config.lang].fields.wrongInput);
+        	message.channel.send(texts[config.lang].footers.info);
         	message.channel.stopTyping(true);
         break;
     }
@@ -100,8 +112,8 @@ chappie.on('message', function(message) {
                 	message.channel.startTyping();
                 	let embed = utils.createEmbed(null, chappie.user.username, 
                         chappie.user.avatarURL, utils.colors.DARK_GREEN, 
-                        'Heey yooo ' + message.author + '! Regards! :thumbsup:', 
-                        utils.gifs.REGARDS, utils.footers.INFO, null);
+                        'Heey yooo ' + message.author + '! ' + texts[config.lang].titles.regards, 
+                        utils.gifs.REGARDS, texts[config.lang].footers.info, null, utils.icons.INFO);
                     message.channel.stopTyping(true);
                     message.channel.send(embed);
                 }
