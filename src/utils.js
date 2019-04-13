@@ -1,6 +1,6 @@
 const Discord = require("discord.js"),
-	  config = require('./config.json'),
-	  texts = require('./texts.json');
+	config = require('./config.json'),
+	texts = require('./texts.json');
 
 exports.colors = {
 	DARK_GREEN: 'DARK_GREEN',
@@ -17,12 +17,8 @@ exports.gifs = {
 	WALKING: 'https://media.giphy.com/media/KWjRQ4Zttlzb2/giphy.gif'
 }
 
-exports.createEmbed = function(title, author, avatar, color, description, image, 
-	footer, thumbnail, icon) {
-	let authorSay = null;
-	if(author != null) {
-		authorSay = author + texts[config.lang].titles.say;
-	}
+exports.createEmbed = function(title, author, avatar, color, description, image, footer, thumbnail, icon) {
+	let authorSay = author != null ? (author + texts[config.lang].titles.say) : null;
 	let embed = new Discord.RichEmbed()
 		.setTitle(title != null ? title : '')
 		.setAuthor(authorSay != null ? authorSay : '', avatar != null ? avatar : '')
@@ -30,8 +26,7 @@ exports.createEmbed = function(title, author, avatar, color, description, image,
 		.setDescription(description != null ? description : '')
 		.setImage(image != null ? image : '')
 		.setFooter(footer != null ? footer : '', icon != null ? icon : '')
-		.setThumbnail(thumbnail != null ? thumbnail : '')
-		.setTimestamp();
-
+		.setThumbnail(thumbnail != null ? thumbnail : '');
+		//.setTimestamp();
 	return embed;
 }
