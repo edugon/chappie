@@ -94,7 +94,7 @@ function guessResponse(args, message) {
         break;
         case 'gif':
         	let searchKeywords = args.splice(1);
-        	if(tag.length > 0) {
+        	if(searchKeywords.length > 0) {
         		giphy.searchByKeywords(searchKeywords)
             	.then(function(response) {
             		message.channel.send(
@@ -105,7 +105,7 @@ function guessResponse(args, message) {
                 	console.error(error);
             	});
         	} else {
-        		giphy.getRandom(tag[0])
+        		giphy.getRandom(searchKeywords[0])
             	.then(function(response) {
             		message.channel.send(
             			{ files: [response.data.images.downsized_medium.url] }
