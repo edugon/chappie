@@ -89,7 +89,7 @@ function guessResponse(args, message) {
         case 'say':
         	let keywords = args.splice(1);
             keywords.join();
-            let phrase = keywords.toString().replace(",", " ");
+            let phrase = keywords.toString().replace(new RegExp(",", "g"), " ");
             message.channel.send(`${phrase} :grimacing:`);
         break;
         case 'gif':
