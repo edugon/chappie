@@ -3,7 +3,7 @@ const https = require('https'),
 	hostname = 'https://api.giphy.com/v1/gifs/';
 
 // returns GIF by keywords searching
-exports.searchByKeywords = function(phrase, limit) {
+exports.getByKeywords = function(phrase, limit) {
 	let keywords = phrase.toString().replace(",", "+");
 	let address = hostname + 'search'
 		+ '?api_key=' + config.giphy

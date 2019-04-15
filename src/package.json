@@ -6,6 +6,9 @@
 	"author": "eduu",
 	"dependencies": {
 	    "discord.js": "latest",
-	    "winston": "latest"
+	    "winston": "latest",
+	    "ytdl-core": "latest",
+	    "ffmpeg-binaries": "latest",
+	    "node-opus": "latest"
 	}
 }

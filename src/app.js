@@ -4,7 +4,6 @@ const Discord = require('discord.js'),
 	config = require('./config.json'),
 	texts = require('./texts.json'),
 	utils = require('./utils.js'),
-	giphy = require('./clients/giphy.js'),
 	defaultChannel = 'development'; // dev channel
 
 // this event triggers when chappie is ready.
@@ -66,7 +65,7 @@ chappie.on('message', function(message) {
             // !chappie
             case 'chappie':
                 if(args.length > 0) {
-                    guessResponse(args, message);
+                    utils.guessMessage(args, message, chappie);
                 } else {
                     // default message
                 	message.channel.startTyping();
@@ -81,64 +80,6 @@ chappie.on('message', function(message) {
          }
      }
 });
-
-// this function guesses member messages.
-function guessResponse(args, message) {
-	message.channel.startTyping();
-	switch(args[0]) {
-        case 'say':
-        	let keywords = args.splice(1);
-            keywords.join();
-            let phrase = keywords.toString().replace(new RegExp(",", "g"), " ");
-            message.channel.send(`${phrase} :grimacing:`);
-        break;
-        case 'gif':
-        	let searchKeywords = args.splice(1);
-        	if(searchKeywords.length > 0) {
-        		giphy.searchByKeywords(searchKeywords)
-            	.then(function(response) {
-            		message.channel.send(
-            			{ files: [response.data[0].images.downsized_medium.url] }
-            		);
-            	})
-            	.catch(function(error) {
-                	console.error(error);
-            	});
-        	} else {
-        		giphy.getRandom(searchKeywords[0])
-            	.then(function(response) {
-            		message.channel.send(
-            			{ files: [response.data.images.downsized_medium.url] }
-            		);
-            	})
-            	.catch(function(error) {
-                	console.error(error);
-            	});
-        	}
-        break;
-        case 'info':
-            let embed = utils.createEmbed(null, chappie.user.username, chappie.user.avatarURL, 
-                utils.colors.DARK_GREEN, texts[config.lang].fields.about, null, 
-                texts[config.lang].footers.maintainer, chappie.user.avatarURL, utils.icons.INFO)
-            .addField(texts[config.lang].titles.help, texts[config.lang].fields.help)
-            .addField(texts[config.lang].titles.lang, texts[config.lang].fields.lang);
-            message.channel.send(embed);
-        break;
-        case 'español':
-            config.lang = 'spanish';
-            message.channel.send(texts[config.lang].fields.language);
-        break;
-        case 'english':
-            config.lang = 'english';
-            message.channel.send(texts[config.lang].fields.language);        
-        break;
-        default: 
-        	message.channel.send(texts[config.lang].fields.wrongInput);
-        	message.channel.send(texts[config.lang].footers.info);
-        break;
-    }
-    message.channel.stopTyping(true);
-}
 
 // discord login
 chappie.login(config.discord);

@@ -17,7 +17,8 @@
 			"memberAdd": "just joined... Welcome! come in and wash the dishes hehe regards :joy: :joy:",
 			"help": "1. Type '!chappie say <your words>' and I will repeat.\n2. Type '!chappie steam' to get news from Steam.\n3. Type '!chappie gif <your words>' and I will send a GIF.",
 			"language": "OK! Lets speak english! :yum:",
-			"lang": "Type '!chappie <english|español>' to change my language."
+			"lang": "Type '!chappie <english|español>' to change my language.",
+			"memberNotInChannel": "You need to join a voice channel first."
 		},
 		"footers": {
 			"info": "Type '!chappie info' to know more about me 😊",
@@ -43,7 +44,8 @@
 			"memberAdd": "acaba de unirse... Bienvenido! pasa y frega los platos JAJA SALUDOS :joy: :joy:",
 			"help": "1. Escribe '!chappie say <tus palabras>' y repetiré la frase.\n2. Escribe '!chappie steam' para consultar noticias de Steam.\n3. Escribe '!chappie gif <tus palabras>' y te mandaré un GIF.",
 			"language": "¡Vale! Hablamos en castellano :yum:",
-			"lang": "Escribe '!chappie <english|español> para cambiar mi idioma."
+			"lang": "Escribe '!chappie <english|español> para cambiar mi idioma.",
+			"memberNotInChannel": "Primero conéctate a un canal de voz."
 		},
 		"footers": {
 			"info": "Escribe '!chappie info' para saber más sobre mí 😊",
