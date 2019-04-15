@@ -1,4 +1,5 @@
 {
-	"token": "yourTokenHere",
+	"discord": "token",
+	"giphy": "token",
 	"lang": "english"
 }
