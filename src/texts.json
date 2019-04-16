@@ -21,7 +21,7 @@
 			"memberNotInChannel": "You need to join a voice channel first."
 		},
 		"footers": {
-			"info": "Type '!chappie info' to know more about me 😊",
+			"info": "Type '!chappie info' to know more about me",
 			"wip": "This may change in the future ☝",
 			"maintainer": "I have been developed by eduu <shockeR>"
 		}

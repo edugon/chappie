@@ -4,15 +4,16 @@ const Discord = require('discord.js'),
 	config = require('./config.json'),
 	texts = require('./texts.json'),
 	utils = require('./utils.js'),
+	commands = require('./commands.js'),
 	defaultChannel = 'development'; // dev channel
 
-// this event triggers when chappie is ready.
+// this event triggers when chappie is ready
 chappie.on('ready', function() {
 	console.log({users: chappie.users.size, channels: chappie.channels.size});
 	console.log('chappie is listening');
 });
 
-// this event triggers when chappie joins a guild.
+// this event triggers when chappie joins a guild
 chappie.on('guildCreate', function(guild) {
     console.log('new guild joined');
     console.log({guildName: guild.name, guildID: guild.id, members: guild.memberCount});
@@ -25,7 +26,7 @@ chappie.on('guildCreate', function(guild) {
     channel.send(embed);
 });
 
-// this event triggers when chappie is removed from a guild.
+// this event triggers when chappie is removed from a guild
 chappie.on('guildDelete', function(guild) {
   	console.log('removed from guild');
     console.log({guildName: guild.name, guildID: guild.id});
@@ -37,7 +38,7 @@ chappie.on('guildDelete', function(guild) {
     channel.send(embed);
 });
 
-// this event triggers when new member is added to the guild.
+// this event triggers when new member is added to the guild
 chappie.on('guildMemberAdd', function(member) {
     console.log('new user');
     console.log({member: member.displayName, guild: member.guild.name});
@@ -52,7 +53,7 @@ chappie.on('guildMemberAdd', function(member) {
     }
 });
 
-// this event triggers when member sends a message.
+// this event triggers when member sends a message
 chappie.on('message', function(message) {
 	// chappie needs to know if it will execute a command
     // it will listen for messages that will start with `!`
@@ -65,7 +66,7 @@ chappie.on('message', function(message) {
             // !chappie
             case 'chappie':
                 if(args.length > 0) {
-                    utils.guessMessage(args, message, chappie);
+                    commands.guessCommand(args, message, chappie);
                 } else {
                     // default message
                 	message.channel.startTyping();
