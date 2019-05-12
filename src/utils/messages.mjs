@@ -1,9 +1,9 @@
-const Discord = require("discord.js"),
-	config = require('../config.json'),
-    texts = require('../texts.json');
+import Discord from "discord.js";
+import config from '../config';
+import texts from '../texts';
 
 // returns an embedded message
-exports.createEmbed = function(title, author, avatar, color, description, image, footer, thumbnail, icon) {
+export function createEmbed(title, author, avatar, color, description, image, footer, thumbnail, icon) {
 	let authorSay = author != null ? (author + texts[config.lang].titles.say) : null;
 	let embed = new Discord.RichEmbed()
 		.setTitle(title != null ? title : '')
@@ -18,7 +18,7 @@ exports.createEmbed = function(title, author, avatar, color, description, image,
 }
 
 // user is not in a voice channel
-exports.noVoiceMessage = function(channel) {
+export function noVoiceMessage(channel) {
 	channel.startTyping();
 	channel.send(texts[config.lang].fields.memberNotInChannel);
 	channel.stopTyping(true);

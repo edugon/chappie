@@ -2,7 +2,7 @@
 	"name": "chappie",
 	"version": "1.0.0",
 	"description": "just chappie :)",
-	"main": "app.js",
+	"main": "app.mjs",
 	"author": "eduu",
 	"dependencies": {
 	    "discord.js": "latest",

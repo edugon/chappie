@@ -1,4 +1,4 @@
-FROM node:8-stretch
+FROM node:9-stretch
 LABEL description="this image builds chappie :)"
 
 # use changes to package.json to force docker not to use the cache
@@ -10,4 +10,5 @@ RUN mkdir -p /usr/src/chappie && cp -a /tmp/node_modules /usr/src/chappie
 WORKDIR /usr/src/chappie
 ADD ./src/ ./
 
-CMD ["node", "app.js"]
+# experimental-modules enables ES6
+CMD ["node", "--experimental-modules", "app.mjs"]

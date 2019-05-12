@@ -1,8 +1,8 @@
-const giphy = require('../clients/giphy.js');
+import { getByKeywords, getRandom } from '../clients/giphy';
 
 // sends GIF by keywords searching
-exports.searchGif = function(keywords, channel) {
-	giphy.getByKeywords(keywords)
+export function searchGif(keywords, channel) {
+	getByKeywords(keywords)
         .then(function(response) {
             channel.send({files: [response.data[0].images.downsized_medium.url]});
         })
@@ -10,8 +10,8 @@ exports.searchGif = function(keywords, channel) {
 }
 
 // sends random GIF
-exports.randomGif = function(channel) {
-	giphy.getRandom()
+export function randomGif(channel) {
+	getRandom()
         .then(function(response) {
             channel.send({files: [response.data.images.downsized_medium.url]});
         })

@@ -1,11 +1,11 @@
-const youtube = require('../clients/youtube.js'),
-	ytdl = require('ytdl-core');
+import { getByKeywords } from '../clients/youtube';
+import ytdl from 'ytdl-core';
 
-exports.dispatcher = null;
+export const dispatcher = null;
 
 // returns Youtube url by keywords searching
-exports.search = function(keywords) {
-	youtube.getByKeywords(keywords)
+export function search(keywords) {
+	getByKeywords(keywords)
         .then(function(response) {
 			// TODO return youtube url from response
 			console.log(response);
@@ -15,35 +15,35 @@ exports.search = function(keywords) {
 }
 
 // plays sound stream from Youtube url
-exports.play = function(url, channel) {
+export function play(url, channel) {
    	channel.join()
         .then(function(connection) {
 			let stream = ytdl(url, {filter:'audioonly'});
 			exports.dispatcher = connection.playStream(stream, {passes: 3, seek: 0, volume: 0.5});
-			console.log(exports.dispatcher);
-			exports.dispatcher.on('error', console.error);
+			console.log(dispatcher);
+			dispatcher.on('error', console.error);
 		})
 		.catch(console.error);
 }
 
 // stops sound stream
-exports.stop = function() {
-	if(exports.dispatcher) {
-    	exports.dispatcher.pause();
+export function stop() {
+	if(dispatcher) {
+    	dispatcher.pause();
     }
 }
 
 // resumes sound stream
-exports.resume = function() {
-	if(exports.dispatcher && exports.dispatcher.paused) {
-		exports.dispatcher.resume();
+export function resume() {
+	if(dispatcher && dispatcher.paused) {
+		dispatcher.resume();
 	}
 }
 
 // leaves channel and destroys sound stream
-exports.leave = function(channel) {
+export function leave(channel) {
 	channel.leave();
-	if(exports.dispatcher) {
-		exports.dispatcher.destroy();
+	if(dispatcher) {
+		dispatcher.destroy();
 	}
 }

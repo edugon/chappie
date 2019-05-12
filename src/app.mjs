@@ -1,15 +1,21 @@
-const Discord = require('discord.js'),
-	logger = require('winston'),
-	chappie = new Discord.Client(),
-	config = require('./config.json'),
-    texts = require('./texts.json'),
-    consts = require('./utils/consts.js'),
-	messages = require('./utils/messages.js'),
-	commands = require('./commands.js'),
+import Discord from 'discord.js';
+//import logger from 'winston';
+import config from './config';
+import texts from './texts';
+import * as consts from './utils/consts';
+import * as messages from './utils/messages';
+import * as commands from './commands';
+
+const chappie = new Discord.Client(),
 	defaultChannel = 'development'; // dev channel
 
 // this event triggers when chappie is ready
 chappie.on('ready', function() {
+    let names = [];
+    chappie.guilds.array().forEach(function(guild) {
+        names.push(guild.name);
+    });
+    console.log({guilds: names});
 	console.log({users: chappie.users.size, channels: chappie.channels.size});
 	console.log('chappie is listening');
 });

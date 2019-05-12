@@ -1,9 +1,9 @@
-const https = require('https'),
-	config = require('../config.json'),
-	consts = require('../utils/consts.js');
+import https from 'https';
+import config from '../config';
+import * as consts from '../utils/consts';
 
 // returns GIF by keywords searching
-exports.getByKeywords = function(phrase, limit) {
+export function getByKeywords(phrase, limit) {
 	let keywords = phrase.toString().replace(",", "+");
 	let address = consts.hosts.GIPHY.url + 'search'
 		+ '?api_key=' + config.tokens.giphy
@@ -20,7 +20,7 @@ exports.getByKeywords = function(phrase, limit) {
                 	strData += data; // weird
             	});
             	res.on('end', function() {
-                	obj = JSON.parse(strData);
+                	let obj = JSON.parse(strData);
                 	resolve(obj);
             	});
 			}
@@ -31,7 +31,7 @@ exports.getByKeywords = function(phrase, limit) {
 }
 
 // returns random GIF
-exports.getRandom = function(tag, rating, format) {
+export function getRandom(tag, rating, format) {
 	let address = consts.hosts.GIPHY.url + 'random'
 		+ '?api_key=' + config.tokens.giphy
 		+ '&tag=' + (tag != null ? tag : '')
@@ -48,7 +48,7 @@ exports.getRandom = function(tag, rating, format) {
                 	strData += data; // weird
             	});
             	res.on('end', function() {
-                	obj = JSON.parse(strData);
+                	let obj = JSON.parse(strData);
                 	resolve(obj);
             	});
 			}

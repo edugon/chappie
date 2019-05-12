@@ -1,9 +1,9 @@
-const https = require('https'),
-	config = require('../config.json'),
-	consts = require('../utils/consts.js');
+import https from 'https';
+import config from '../config';
+import * as consts from '../utils/consts';
 
 // checks if an url is valid
-exports.isValidUrl = function(url, host) {
+export function isValidUrl(url, host) {
 	if(host === consts.hosts.YOUTUBE.name) {
 		return (url.match(consts.hosts.YOUTUBE.regex)) ? true : false;
 	}
@@ -11,7 +11,7 @@ exports.isValidUrl = function(url, host) {
 }
 
 // returns Youtube video by keywords searching
-exports.getByKeywords = function(phrase, limit) {
+export function getByKeywords(phrase, limit) {
 	let keywords = phrase.toString().replace(",", "+");
 	let address = consts.hosts.YOUTUBE.url + 'search'
 		+ '?access_token=' + config.tokens.youtube
@@ -28,7 +28,7 @@ exports.getByKeywords = function(phrase, limit) {
                 	strData += data; // weird
             	});
             	res.on('end', function() {
-                	obj = JSON.parse(strData);
+                	let obj = JSON.parse(strData);
                 	resolve(obj);
             	});
 			}

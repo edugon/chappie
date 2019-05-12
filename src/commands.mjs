@@ -1,56 +1,56 @@
-const config = require('./config.json'),
-	texts = require('./texts.json'),
-	messages = require('./utils/messages.js'),
-	consts = require('./utils/consts.js'),
-	gifs = require('./commands/gifs.js'),
-	youtube = require('./clients/youtube.js'),
-	music = require('./commands/music.js');
+import config from './config';
+import texts from './texts';
+import { noVoiceMessage, createEmbed } from './utils/messages';
+import { hosts, colors, icons } from './utils/consts';
+import { searchGif, randomGif } from './commands/gifs';
+import { isValidUrl } from './clients/youtube';
+import { play, search, stop, resume, leave } from './commands/music';
 
 // guesses member commands
-exports.guessCommand = async function(args, message, chappie) {
+export async function guessCommand(args, message, chappie) {
 	switch(args[0]) {
         case 'gif':
         	let gifKeywords = args.splice(1);
         	if(gifKeywords.length > 0) {
-        		gifs.searchGif(gifKeywords, message.channel);
+        		searchGif(gifKeywords, message.channel);
         	} else {
-        		gifs.randomGif(message.channel);
+        		randomGif(message.channel);
         	}
         break;
         case 'play':
         	let input = args.splice(1);
         	if(message.member.voiceChannel) {
 	        	if(input.length > 0) {
-	        		if(youtube.isValidUrl(input[0], consts.hosts.YOUTUBE.name)) {
-	        			music.play(input[0], message.member.voiceChannel);
+	        		if(isValidUrl(input[0], hosts.YOUTUBE.name)) {
+	        			play(input[0], message.member.voiceChannel);
 	        		} else {
-	        			let url = music.search(input[0]);
-	        			music.play(url, message.member.voiceChannel);
+	        			let url = search(input[0]);
+	        			play(url, message.member.voiceChannel);
 	        		}
 	        	}
 	        } else {
-				messages.noVoiceMessage(message.channel);
+				noVoiceMessage(message.channel);
 			}
         break;
         case 'stop':
 			if(message.member.voiceChannel) {
-        		music.stop();
+        		stop();
         	} else {
-		        messages.noVoiceMessage(message.channel);
+		        noVoiceMessage(message.channel);
 		    }
         break;
         case 'resume':
 			if(message.member.voiceChannel) {
-        		music.resume();
+        		resume();
         	} else {
-		        messages.noVoiceMessage(message.channel);
+		        noVoiceMessage(message.channel);
 		    }
         break;
         case 'leave':
 			if(message.member.voiceChannel) {
-        		music.leave(message.member.voiceChannel);
+        		leave(message.member.voiceChannel);
         	} else {
-		        messages.noVoiceMessage(message.channel);
+		        noVoiceMessage(message.channel);
 		    }
         break;
         case 'say':
@@ -63,9 +63,9 @@ exports.guessCommand = async function(args, message, chappie) {
         break;
         case 'info':
         	message.channel.startTyping();
-            let embed = messages.createEmbed(null, chappie.user.username, chappie.user.avatarURL, 
-                consts.colors.DARK_GREEN, texts[config.lang].fields.about, null, 
-                texts[config.lang].footers.maintainer, chappie.user.avatarURL, consts.icons.INFO)
+            let embed = createEmbed(null, chappie.user.username, chappie.user.avatarURL, 
+                colors.DARK_GREEN, texts[config.lang].fields.about, null, 
+                texts[config.lang].footers.maintainer, chappie.user.avatarURL, icons.INFO)
             .addField(texts[config.lang].titles.help, texts[config.lang].fields.help)
             .addField(texts[config.lang].titles.lang, texts[config.lang].fields.lang);
             message.channel.send(embed);
