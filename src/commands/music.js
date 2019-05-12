@@ -7,7 +7,9 @@ exports.dispatcher = null;
 exports.search = function(keywords) {
 	youtube.getByKeywords(keywords)
         .then(function(response) {
-            // return youtube url from response
+			// TODO return youtube url from response
+			console.log(response);
+			return '';
         })
         .catch(console.error);
 }
@@ -18,6 +20,7 @@ exports.play = function(url, channel) {
         .then(function(connection) {
 			let stream = ytdl(url, {filter:'audioonly'});
 			exports.dispatcher = connection.playStream(stream, {passes: 3, seek: 0, volume: 0.5});
+			console.log(exports.dispatcher);
 			exports.dispatcher.on('error', console.error);
 		})
 		.catch(console.error);

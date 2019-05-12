@@ -1,6 +1,12 @@
 {
-	"discord": "token",
-	"giphy": "token",
-	"youtube": "token",
+	"credentials": {
+		"client_id": "client-id",
+		"client_secret": "client-secret"
+	},
+	"tokens": {
+		"discord": "discord-token",
+		"giphy": "giphy-token",
+		"youtube": "youtube-token"
+	},
 	"lang": "english"
 }

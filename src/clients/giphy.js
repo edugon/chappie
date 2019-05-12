@@ -1,12 +1,12 @@
 const https = require('https'),
 	config = require('../config.json'),
-	hostname = 'https://api.giphy.com/v1/gifs/';
+	consts = require('../utils/consts.js');
 
 // returns GIF by keywords searching
 exports.getByKeywords = function(phrase, limit) {
 	let keywords = phrase.toString().replace(",", "+");
-	let address = hostname + 'search'
-		+ '?api_key=' + config.giphy
+	let address = consts.hosts.GIPHY.url + 'search'
+		+ '?api_key=' + config.tokens.giphy
 		+ '&q=' + keywords
 		+ '&limit=' + (limit != null ? limit : 1);
 	console.log('GET: ' + address);
@@ -32,8 +32,8 @@ exports.getByKeywords = function(phrase, limit) {
 
 // returns random GIF
 exports.getRandom = function(tag, rating, format) {
-	let address = hostname + 'random'
-		+ '?api_key=' + config.giphy
+	let address = consts.hosts.GIPHY.url + 'random'
+		+ '?api_key=' + config.tokens.giphy
 		+ '&tag=' + (tag != null ? tag : '')
 		+ '&rating=' + (rating != null ? rating : 'g')
 		+ '&format=' + (format != null ? format : 'json');

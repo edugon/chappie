@@ -1,13 +1,21 @@
 const https = require('https'),
 	config = require('../config.json'),
-	hostname = 'https://www.googleapis.com/youtube/v3/';
+	consts = require('../utils/consts.js');
+
+// checks if an url is valid
+exports.isValidUrl = function(url, host) {
+	if(host === consts.hosts.YOUTUBE.name) {
+		return (url.match(consts.hosts.YOUTUBE.regex)) ? true : false;
+	}
+	return false;
+}
 
 // returns Youtube video by keywords searching
 exports.getByKeywords = function(phrase, limit) {
 	let keywords = phrase.toString().replace(",", "+");
-	let address = hostname + 'search';
-		//+ '?api_key=' + config.giphy
-		//+ '&q=' + keywords
+	let address = consts.hosts.YOUTUBE.url + 'search'
+		+ '?access_token=' + config.tokens.youtube
+		+ '&part=' + keywords;
 		//+ '&limit=' + (limit != null ? limit : 1);
 	console.log('GET: ' + address);
 	return new Promise(function(resolve, reject) {

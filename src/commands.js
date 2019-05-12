@@ -1,7 +1,9 @@
 const config = require('./config.json'),
 	texts = require('./texts.json'),
-	utils = require('./utils.js'),
+	messages = require('./utils/messages.js'),
+	consts = require('./utils/consts.js'),
 	gifs = require('./commands/gifs.js'),
+	youtube = require('./clients/youtube.js'),
 	music = require('./commands/music.js');
 
 // guesses member commands
@@ -19,7 +21,7 @@ exports.guessCommand = async function(args, message, chappie) {
         	let input = args.splice(1);
         	if(message.member.voiceChannel) {
 	        	if(input.length > 0) {
-	        		if(utils.isValidUrl(input[0], utils.hosts.YOUTUBE)) {
+	        		if(youtube.isValidUrl(input[0], consts.hosts.YOUTUBE.name)) {
 	        			music.play(input[0], message.member.voiceChannel);
 	        		} else {
 	        			let url = music.search(input[0]);
@@ -27,28 +29,28 @@ exports.guessCommand = async function(args, message, chappie) {
 	        		}
 	        	}
 	        } else {
-				utils.noVoiceMessage(message.channel);
+				messages.noVoiceMessage(message.channel);
 			}
         break;
         case 'stop':
 			if(message.member.voiceChannel) {
         		music.stop();
         	} else {
-		        utils.noVoiceMessage(message.channel);
+		        messages.noVoiceMessage(message.channel);
 		    }
         break;
         case 'resume':
 			if(message.member.voiceChannel) {
         		music.resume();
         	} else {
-		        utils.noVoiceMessage(message.channel);
+		        messages.noVoiceMessage(message.channel);
 		    }
         break;
         case 'leave':
 			if(message.member.voiceChannel) {
         		music.leave(message.member.voiceChannel);
         	} else {
-		        utils.noVoiceMessage(message.channel);
+		        messages.noVoiceMessage(message.channel);
 		    }
         break;
         case 'say':
@@ -61,9 +63,9 @@ exports.guessCommand = async function(args, message, chappie) {
         break;
         case 'info':
         	message.channel.startTyping();
-            let embed = utils.createEmbed(null, chappie.user.username, chappie.user.avatarURL, 
-                utils.colors.DARK_GREEN, texts[config.lang].fields.about, null, 
-                texts[config.lang].footers.maintainer, chappie.user.avatarURL, utils.icons.INFO)
+            let embed = messages.createEmbed(null, chappie.user.username, chappie.user.avatarURL, 
+                consts.colors.DARK_GREEN, texts[config.lang].fields.about, null, 
+                texts[config.lang].footers.maintainer, chappie.user.avatarURL, consts.icons.INFO)
             .addField(texts[config.lang].titles.help, texts[config.lang].fields.help)
             .addField(texts[config.lang].titles.lang, texts[config.lang].fields.lang);
             message.channel.send(embed);

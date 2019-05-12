@@ -1,37 +1,6 @@
 const Discord = require("discord.js"),
-	config = require('./config.json'),
-	texts = require('./texts.json');
-
-exports.colors = {
-	DARK_GREEN: 'DARK_GREEN',
-	DARK_RED: 'DARK_RED',
-	DARK_GOLD: 'DARK_GOLD'
-}
-
-exports.icons = {
-	INFO: 'http://www.myiconfinder.com/uploads/iconsets/256-256-92772c80d46c3d241a175d4ade309f88.png'
-}
-
-exports.gifs = {
-	REGARDS: 'https://media2.giphy.com/media/pjZLhQIEx9dBe/giphy.gif',
-	WALKING: 'https://media.giphy.com/media/KWjRQ4Zttlzb2/giphy.gif'
-}
-
-exports.hosts = {
-	YOUTUBE: 'YOUTUBE'
-}
-
-exports.regex = {
-	YOUTUBE: /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/
-}
-
-// checks if an url is valid
-exports.isValidUrl = function(url, host) {
-	if(host === exports.hosts.YOUTUBE) {
-		return (url.match(exports.regex.YOUTUBE)) ? true : false;
-	}
-	return false;
-}
+	config = require('../config.json'),
+    texts = require('../texts.json');
 
 // returns an embedded message
 exports.createEmbed = function(title, author, avatar, color, description, image, footer, thumbnail, icon) {

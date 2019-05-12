@@ -2,8 +2,9 @@ const Discord = require('discord.js'),
 	logger = require('winston'),
 	chappie = new Discord.Client(),
 	config = require('./config.json'),
-	texts = require('./texts.json'),
-	utils = require('./utils.js'),
+    texts = require('./texts.json'),
+    consts = require('./utils/consts.js'),
+	messages = require('./utils/messages.js'),
 	commands = require('./commands.js'),
 	defaultChannel = 'development'; // dev channel
 
@@ -19,9 +20,9 @@ chappie.on('guildCreate', function(guild) {
     console.log({guildName: guild.name, guildID: guild.id, members: guild.memberCount});
   	let channel = guild.channels.find(ch => ch.name === defaultChannel);
   	channel.startTyping();
-    let embed = utils.createEmbed(null, chappie.user.username, chappie.user.avatarURL,
-        utils.colors.DARK_GREEN, texts[config.lang].fields.helloWorld, utils.gifs.REGARDS, 
-        texts[config.lang].footers.info, null, utils.icons.INFO);
+    let embed = messages.createEmbed(null, chappie.user.username, chappie.user.avatarURL,
+        consts.colors.DARK_GREEN, texts[config.lang].fields.helloWorld, consts.gifs.REGARDS, 
+        texts[config.lang].footers.info, null, consts.icons.INFO);
     channel.stopTyping(true);
     channel.send(embed);
 });
@@ -32,8 +33,8 @@ chappie.on('guildDelete', function(guild) {
     console.log({guildName: guild.name, guildID: guild.id});
   	let channel = guild.channels.find(ch => ch.name === defaultChannel);
   	channel.startTyping();
-    let embed = utils.createEmbed(null, chappie.user.username, chappie.user.avatarURL, 
-        utils.colors.DARK_RED, texts[config.lang].fields.farewell, utils.gifs.WALKING);
+    let embed = messages.createEmbed(null, chappie.user.username, chappie.user.avatarURL, 
+        consts.colors.DARK_RED, texts[config.lang].fields.farewell, consts.gifs.WALKING);
     channel.stopTyping(true);
     channel.send(embed);
 });
@@ -45,9 +46,9 @@ chappie.on('guildMemberAdd', function(member) {
     let channel = member.guild.channels.find(ch => ch.name === defaultChannel);
     if(channel) {
         channel.startTyping();
-        let embed = utils.createEmbed(null, chappie.user.username, chappie.user.avatarURL, 
-            utils.colors.DARK_GREEN, `Hello World! ${member} ` + texts[config.lang].fields.memberAdd, 
-            utils.gifs.REGARDS, texts[config.lang].footers.info, null, utils.icons.INFO);
+        let embed = messages.createEmbed(null, chappie.user.username, chappie.user.avatarURL, 
+            consts.colors.DARK_GREEN, `Hello World! ${member} ` + texts[config.lang].fields.memberAdd, 
+            consts.gifs.REGARDS, texts[config.lang].footers.info, null, consts.icons.INFO);
         channel.stopTyping(true);
         channel.send(embed);
     }
@@ -70,10 +71,10 @@ chappie.on('message', function(message) {
                 } else {
                     // default message
                 	message.channel.startTyping();
-                	let embed = utils.createEmbed(null, chappie.user.username, 
-                        chappie.user.avatarURL, utils.colors.DARK_GREEN, 
+                	let embed = messages.createEmbed(null, chappie.user.username, 
+                        chappie.user.avatarURL, consts.colors.DARK_GREEN, 
                         'Heey yooo ' + message.author + '! ' + texts[config.lang].titles.regards, 
-                        utils.gifs.REGARDS, texts[config.lang].footers.info, null, utils.icons.INFO);
+                        consts.gifs.REGARDS, texts[config.lang].footers.info, null, consts.icons.INFO);
                     message.channel.stopTyping(true);
                     message.channel.send(embed);
                 }
@@ -83,4 +84,4 @@ chappie.on('message', function(message) {
 });
 
 // discord login
-chappie.login(config.discord);
+chappie.login(config.tokens.discord);
