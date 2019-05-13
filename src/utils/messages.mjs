@@ -1,6 +1,6 @@
 import Discord from "discord.js";
-import config from '../config';
-import texts from '../texts';
+import config from '../resources/config';
+import texts from '../resources/texts';
 
 // returns an embedded message
 export function createEmbed(title, author, avatar, color, description, image, footer, thumbnail, icon) {

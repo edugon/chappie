@@ -1,10 +1,10 @@
 import Discord from 'discord.js';
 //import logger from 'winston';
-import config from './config';
-import texts from './texts';
-import * as consts from './utils/consts';
 import * as messages from './utils/messages';
+import * as consts from './utils/consts';
 import * as commands from './commands';
+import config from './resources/config';
+import texts from './resources/texts';
 
 const chappie = new Discord.Client(),
 	defaultChannel = 'development'; // dev channel

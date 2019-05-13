@@ -1,6 +1,6 @@
 import https from 'https';
-import config from '../config';
 import * as consts from '../utils/consts';
+import config from '../resources/config';
 
 // returns GIF by keywords searching
 export function getByKeywords(phrase, limit) {

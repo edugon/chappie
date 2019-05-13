@@ -1,10 +1,10 @@
-import config from './config';
-import texts from './texts';
-import { noVoiceMessage, createEmbed } from './utils/messages';
-import { hosts, colors, icons } from './utils/consts';
-import { searchGif, randomGif } from './commands/gifs';
-import { isValidUrl } from './clients/youtube';
 import { play, search, stop, resume, leave } from './commands/music';
+import { noVoiceMessage, createEmbed } from './utils/messages';
+import { searchGif, randomGif } from './commands/gifs';
+import { hosts, colors, icons } from './utils/consts';
+import { isValidUrl } from './clients/youtube';
+import config from './resources/config';
+import texts from './resources/texts';
 
 // guesses member commands
 export async function guessCommand(args, message, chappie) {
@@ -25,7 +25,7 @@ export async function guessCommand(args, message, chappie) {
 	        			play(input[0], message.member.voiceChannel);
 	        		} else {
 	        			let url = search(input[0]);
-	        			play(url, message.member.voiceChannel);
+	        			//play(url, message.member.voiceChannel);
 	        		}
 	        	}
 	        } else {
