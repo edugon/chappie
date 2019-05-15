@@ -3,6 +3,8 @@ import Discord from 'discord.js';
 import * as commands from './commands';
 import * as messages from './utils/messages';
 import * as consts from './utils/consts';
+import * as oauth from './utils/oauth';
+import * as commands from './commands';
 import config from './resources/config';
 import texts from './resources/texts';
 
@@ -26,9 +28,17 @@ chappie.on('guildCreate', function(guild) {
     console.log({guildName: guild.name, guildID: guild.id, members: guild.memberCount});
   	let channel = guild.channels.find(ch => ch.name === defaultChannel);
   	channel.startTyping();
-    let embed = messages.createEmbed(null, chappie.user.username, chappie.user.avatarURL,
-        consts.colors.DARK_GREEN, texts[config.lang].fields.helloWorld, consts.gifs.REGARDS, 
-        texts[config.lang].footers.info, null, consts.icons.INFO);
+    let embed = messages.createEmbed(
+        null,
+        chappie.user.username,
+        chappie.user.avatarURL,
+        consts.colors.DARK_GREEN,
+        texts[config.lang].fields.helloWorld,
+        consts.gifs.REGARDS, 
+        texts[config.lang].footers.info,
+        null,
+        consts.icons.INFO
+    );
     channel.stopTyping(true);
     channel.send(embed);
 });
@@ -39,8 +49,14 @@ chappie.on('guildDelete', function(guild) {
     console.log({guildName: guild.name, guildID: guild.id});
   	let channel = guild.channels.find(ch => ch.name === defaultChannel);
   	channel.startTyping();
-    let embed = messages.createEmbed(null, chappie.user.username, chappie.user.avatarURL, 
-        consts.colors.DARK_RED, texts[config.lang].fields.farewell, consts.gifs.WALKING);
+    let embed = messages.createEmbed(
+        null,
+        chappie.user.username,
+        chappie.user.avatarURL, 
+        consts.colors.DARK_RED,
+        texts[config.lang].fields.farewell,
+        consts.gifs.WALKING
+    );
     channel.stopTyping(true);
     channel.send(embed);
 });
@@ -52,9 +68,17 @@ chappie.on('guildMemberAdd', function(member) {
     let channel = member.guild.channels.find(ch => ch.name === defaultChannel);
     if(channel) {
         channel.startTyping();
-        let embed = messages.createEmbed(null, chappie.user.username, chappie.user.avatarURL, 
-            consts.colors.DARK_GREEN, `Hello World! ${member} ` + texts[config.lang].fields.memberAdd, 
-            consts.gifs.REGARDS, texts[config.lang].footers.info, null, consts.icons.INFO);
+        let embed = messages.createEmbed(
+            null,
+            chappie.user.username,
+            chappie.user.avatarURL, 
+            consts.colors.DARK_GREEN,
+            `Hello World! ${member} ` + texts[config.lang].fields.memberAdd, 
+            consts.gifs.REGARDS,
+            texts[config.lang].footers.info,
+            null,
+            consts.icons.INFO
+        );
         channel.stopTyping(true);
         channel.send(embed);
     }
@@ -77,10 +101,17 @@ chappie.on('message', function(message) {
                 } else {
                     // default message
                 	message.channel.startTyping();
-                	let embed = messages.createEmbed(null, chappie.user.username, 
-                        chappie.user.avatarURL, consts.colors.DARK_GREEN, 
+                	let embed = messages.createEmbed(
+                        null,
+                        chappie.user.username, 
+                        chappie.user.avatarURL,
+                        consts.colors.DARK_GREEN, 
                         'Heey yooo ' + message.author + '! ' + texts[config.lang].titles.regards, 
-                        consts.gifs.REGARDS, texts[config.lang].footers.info, null, consts.icons.INFO);
+                        consts.gifs.REGARDS,
+                        texts[config.lang].footers.info,
+                        null,
+                        consts.icons.INFO
+                    );
                     message.channel.stopTyping(true);
                     message.channel.send(embed);
                 }
@@ -89,5 +120,5 @@ chappie.on('message', function(message) {
      }
 });
 
-// discord login
 chappie.login(config.tokens.discord);
+//oauth.login();

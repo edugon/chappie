@@ -5,7 +5,7 @@ import config from '../resources/config';
 // checks if an url is valid
 export function isValidUrl(url, host) {
 	if(host === consts.hosts.YOUTUBE.name) {
-		return (url.match(consts.hosts.YOUTUBE.regex)) ? true : false;
+		return url.match(consts.hosts.YOUTUBE.regex);
 	}
 	return false;
 }

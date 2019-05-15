@@ -63,11 +63,17 @@ export async function guessCommand(args, message, chappie) {
         break;
         case 'info':
         	message.channel.startTyping();
-            let embed = messages.createEmbed(null, chappie.user.username, chappie.user.avatarURL, 
-                consts.colors.DARK_GREEN, texts[config.lang].fields.about, null, 
-                texts[config.lang].footers.maintainer, chappie.user.avatarURL, consts.icons.INFO)
-            .addField(texts[config.lang].titles.help, texts[config.lang].fields.help)
-            .addField(texts[config.lang].titles.lang, texts[config.lang].fields.lang);
+            let embed = createEmbed(
+                null,
+                chappie.user.username,
+                chappie.user.avatarURL, 
+                colors.DARK_GREEN,
+                texts[config.lang].fields.about, null, 
+                texts[config.lang].footers.maintainer,
+                chappie.user.avatarURL, icons.INFO
+            );
+            embed.addField(texts[config.lang].titles.help, texts[config.lang].fields.help);
+            embed.addField(texts[config.lang].titles.lang, texts[config.lang].fields.lang);
             message.channel.send(embed);
             message.channel.stopTyping(true);
         break;

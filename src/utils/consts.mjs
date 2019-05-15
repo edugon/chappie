@@ -22,5 +22,9 @@ export const hosts = {
 	GIPHY: {
 		name: 'GIPHY',
 		url: 'https://api.giphy.com/v1/gifs/'
+	},
+	OAUTH: {
+		name: 'OAUTH',
+		url: 'https://accounts.google.com/o/oauth2/'
 	}
 }
