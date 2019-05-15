@@ -3,7 +3,7 @@ import Discord from 'discord.js';
 import * as commands from './commands';
 import * as messages from './utils/messages';
 import * as consts from './utils/consts';
-import * as oauth from './utils/oauth';
+import * as oauth from './clients/oauth';
 import * as commands from './commands';
 import config from './resources/config';
 import texts from './resources/texts';
