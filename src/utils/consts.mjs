@@ -25,6 +25,12 @@ export const hosts = {
 	},
 	OAUTH: {
 		name: 'OAUTH',
-		url: 'https://accounts.google.com/o/oauth2/'
+		url: 'https://accounts.google.com/o/oauth2/',
+		redirect_uri: 'http://localhost:8080',
+		scope: 'https://www.googleapis.com/auth/youtube'
 	}
+}
+
+export const encoding = {
+	UTF_8: 'utf8'
 }
