@@ -1,11 +1,11 @@
 import ytdl from 'ytdl-core';
-import { getByKeywords } from '../clients/youtube';
+import * as youtube from '../clients/youtube';
 
 export const dispatcher = null;
 
 // returns Youtube url by keywords searching
 export function search(keywords) {
-	getByKeywords(keywords)
+	youtube.getByKeywords(keywords)
         .then(function(response) {
 			// TODO return youtube url from response
 			console.log(response);

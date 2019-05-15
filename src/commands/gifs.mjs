@@ -1,8 +1,8 @@
-import { getByKeywords, getRandom } from '../clients/giphy';
+import * as giphy from '../clients/giphy';
 
 // sends GIF by keywords searching
 export function searchGif(keywords, channel) {
-	getByKeywords(keywords)
+	giphy.getByKeywords(keywords)
         .then(function(response) {
             channel.send({files: [response.data[0].images.downsized_medium.url]});
         })
@@ -11,7 +11,7 @@ export function searchGif(keywords, channel) {
 
 // sends random GIF
 export function randomGif(channel) {
-	getRandom()
+	giphy.getRandom()
         .then(function(response) {
             channel.send({files: [response.data.images.downsized_medium.url]});
         })
