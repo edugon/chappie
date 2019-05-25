@@ -1,10 +1,10 @@
  image: docker:stable
 
  before_script:
-   - docker info
+   - sudo docker info
 
  build:
    stage: build
    script:
-     - docker build -t chappie .
-     - docker run chappie
+     - sudo docker build -t chappie .
+     - sudo docker run chappie
