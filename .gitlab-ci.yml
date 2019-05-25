@@ -1,10 +1,13 @@
  image: docker:stable
 
+ variables:
+  DOCKER_HOST: tcp://docker:2375
+ 
  before_script:
-   - sudo docker info
+   - docker info
 
  build:
    stage: build
    script:
-     - sudo docker build -t chappie .
-     - sudo docker run chappie
+     - docker build -t chappie .
+     - docker run chappie
