@@ -10,7 +10,7 @@ export function login(token) {
 		+ '&scope=' + consts.hosts.OAUTH.scope
 		+ '&response_type=code'
 		+ '&access_type=offline';
-	console.log('GET: ' + address);
+	console.log('GET: ' + consts.hosts.OAUTH.url + 'auth?...');
 	return new Promise(function (resolve, reject) {
 		https.get(
 			address,
@@ -21,8 +21,8 @@ export function login(token) {
 					strData += data; // weird
 				});
 				res.on('end', function () {
-					let obj = JSON.parse(strData);
-					console.log(obj);
+					//let obj = JSON.parse(strData);
+					//console.log(strData);
 				});
 			}
 		).on('error', function (error) {

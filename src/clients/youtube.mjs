@@ -11,13 +11,12 @@ export function isValidUrl(url, host) {
 }
 
 // returns Youtube video by keywords searching
-export function getByKeywords(phrase, limit) {
-	let keywords = phrase.toString().replace(",", "+");
+export function getByKeywords(keywords, limit) {
 	let address = consts.hosts.YOUTUBE.url + 'search'
 		+ '?access_token=' + config.tokens.youtube
 		+ '&part=' + keywords;
 		//+ '&limit=' + (limit != null ? limit : 1);
-	console.log('GET: ' + address);
+	console.log('GET: ' + consts.hosts.YOUTUBE.url + 'search?...');
 	return new Promise(function (resolve, reject) {
 		https.get(
 			address,

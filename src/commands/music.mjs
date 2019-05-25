@@ -4,7 +4,8 @@ import * as youtube from '../clients/youtube';
 export const dispatcher = null;
 
 // returns Youtube url by keywords searching
-export function search(keywords) {
+export function search(phrase) {
+	let keywords = phrase.toString().replace(/,/g, '+');
 	youtube.getByKeywords(keywords)
 		.then(function (response) {
 			// TODO return youtube url from response
