@@ -1,5 +1,9 @@
 image: docker:stable
 
+variables:
+  - DOCKER_HOST: tcp://docker:2375
+  - DOCKER_DRIVER: overlay2
+
 stages:
   - Build image
   - Push to Docker Hub
