@@ -10,11 +10,17 @@ import texts from './resources/texts';
 export async function guessCommand(args, message, chappie) {
 	switch (args[0]) {
 		case 'gif':
-			let gifKeywords = args.splice(1);
-			if (gifKeywords.length > 0) {
-				gifs.searchGif(gifKeywords, message.channel);
-			} else {
-				gifs.randomGif(message.channel);
+			let keywords = args.splice(1);
+			switch(keywords.length) {
+				case 0:
+					gifs.randomGif(message.channel);
+					break;
+				case 1:
+					gifs.randomGif(message.channel, keywords);
+					break;
+				default:
+					gifs.searchGif(message.channel, keywords);
+					break;
 			}
 			break;
 		case 'play':
@@ -55,22 +61,22 @@ export async function guessCommand(args, message, chappie) {
 			break;
 		case 'say':
 			message.channel.startTyping();
-			let keywords = args.splice(1);
-			keywords.join();
-			let phrase = keywords.toString().replace(new RegExp(",", "g"), " ");
+			let words = args.splice(1);
+			words.join();
+			let phrase = words.toString().replace(new RegExp(",", "g"), " ");
 			message.channel.send(`${phrase} :grimacing:`);
 			message.channel.stopTyping(true);
 			break;
 		case 'info':
 			message.channel.startTyping();
-			let embed = createEmbed(
+			let embed = messages.createEmbed(
 				null,
 				chappie.user.username,
 				chappie.user.avatarURL,
-				colors.DARK_GREEN,
+				consts.colors.DARK_GREEN,
 				texts[config.lang].fields.about, null,
 				texts[config.lang].footers.maintainer,
-				chappie.user.avatarURL, icons.INFO
+				chappie.user.avatarURL, consts.icons.INFO
 			);
 			embed.addField(texts[config.lang].titles.help, texts[config.lang].fields.help);
 			embed.addField(texts[config.lang].titles.lang, texts[config.lang].fields.lang);

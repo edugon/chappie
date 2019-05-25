@@ -3,13 +3,12 @@ import * as consts from '../utils/consts';
 import config from '../resources/config';
 
 // returns GIF by keywords searching
-export function getByKeywords(phrase, limit) {
-	let keywords = phrase.toString().replace(",", "+");
+export function getByKeywords(keywords, limit) {
 	let address = consts.hosts.GIPHY.url + 'search'
 		+ '?api_key=' + config.tokens.giphy
 		+ '&q=' + keywords
 		+ '&limit=' + (limit != null ? limit : 1);
-	console.log('GET: ' + address);
+	console.log('GET: ' + consts.hosts.GIPHY.url + 'search/?...');
 	return new Promise(function (resolve, reject) {
 		https.get(
 			address,
@@ -37,7 +36,7 @@ export function getRandom(tag, rating, format) {
 		+ '&tag=' + (tag != null ? tag : '')
 		+ '&rating=' + (rating != null ? rating : 'g')
 		+ '&format=' + (format != null ? format : 'json');
-	console.log('GET: ' + address);
+	console.log('GET: ' + consts.hosts.GIPHY.url + 'random?...');
 	return new Promise(function (resolve, reject) {
 		https.get(
 			address,
