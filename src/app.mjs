@@ -95,7 +95,8 @@ chappie.on('message', function (message) {
 			// !chappie
 			case 'chappie':
 				if (args.length > 0) {
-					commands.guessCommand(args, message, chappie);
+					commands.guessCommand(args, message, chappie)
+					.catch(console.error);
 				} else {
 					// default message
 					message.channel.startTyping();
@@ -118,5 +119,5 @@ chappie.on('message', function (message) {
 	}
 });
 
+oauth.login();
 chappie.login(config.tokens.discord);
-//oauth.login();
