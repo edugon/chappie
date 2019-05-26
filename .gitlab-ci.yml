@@ -5,23 +5,22 @@ variables:
    DOCKER_DRIVER: overlay2
 
 stages:
-  - Build image
-  - Push to Docker Hub
+  - build
+  - push
 
 services:
   - docker:dind
 
 docker build:
-  stage: Build image
+  stage: build
   script:
   - docker info
-  - docker build -t chappie .
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - docker build -t $CI_REGISTRY/edugon/chappie .
 
 docker push:
-  stage: Push to Docker Hub
+  stage: push
   only:
   - master
   script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker build -t $CI_REGISTRY/edugon/chappie .
     - docker push $CI_REGISTRY/edugon/chappie
