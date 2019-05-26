@@ -1,7 +1,5 @@
 # chappie
-[![pipeline status](https://gitlab.com/edugon/chappie/badges/master/pipeline.svg)](https://gitlab.com/edugon/chappie/commits/master)
-
-This document describes the deployment and functioning of chappie.
+[![pipeline status](https://gitlab.com/edugon/chappie/badges/master/pipeline.svg)](https://gitlab.com/edugon/chappie/commits/master) [![coverage report](https://gitlab.com/edugon/chappie/badges/master/coverage.svg)](https://gitlab.com/edugon/chappie/commits/master)
 
 ### About
 Chappie is just a chatbot for discord servers :)
