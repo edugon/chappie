@@ -8,6 +8,9 @@ stages:
   - Build image
   - Push to Docker Hub
 
+services:
+  - docker:dind
+
 docker build:
   stage: Build image
   script:
