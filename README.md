@@ -1,5 +1,5 @@
 # chappie
-![discordapp](https://discordapp.com/api/guilds/222078108977594368/embed.png)
+[![pipeline status](https://gitlab.com/edugon/chappie/badges/master/pipeline.svg)](https://gitlab.com/edugon/chappie/commits/master)
 
 This document describes the deployment and functioning of chappie.
 
