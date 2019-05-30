@@ -17,6 +17,8 @@ docker build:
   - docker info
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   - docker build -t $CI_REGISTRY/edugon/chappie .
+  tags:
+    - docker
 
 docker push:
   stage: push
@@ -24,3 +26,5 @@ docker push:
   - master
   script:
     - docker push $CI_REGISTRY/edugon/chappie
+  tags:
+    - docker
