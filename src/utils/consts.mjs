@@ -13,6 +13,10 @@ export const gifs = {
 	WALKING: 'https://media.giphy.com/media/KWjRQ4Zttlzb2/giphy.gif'
 }
 
+export const validCommands = {
+	MUSIC: ['play', 'stop', 'resume', 'leave']
+};
+
 export const hosts = {
 	YOUTUBE: {
 		name: 'YOUTUBE',

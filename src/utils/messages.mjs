@@ -17,9 +17,9 @@ export function createEmbed(title, author, avatar, color, description, image, fo
 	return embed;
 }
 
-// user is not in a voice channel
-export function noVoiceMessage(channel) {
+// sends custom message
+export function send(channel, response) {
 	channel.startTyping();
-	channel.send(texts[config.lang].fields.memberNotInChannel);
+	channel.send(response);
 	channel.stopTyping(true);
 }

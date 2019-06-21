@@ -6,7 +6,9 @@ import * as gifs from './commands/gifs';
 import config from './resources/config';
 import texts from './resources/texts';
 
-// guesses member commands
+const musicChannel = 'music';
+
+// guesses member commands that are related to chappie
 export async function guessCommand(args, message, chappie) {
 	switch (args[0]) {
 		case 'gif':
@@ -24,51 +26,64 @@ export async function guessCommand(args, message, chappie) {
 			}
 			break;
 		case 'play':
-			let input = args.splice(1);
-			if (message.member.voiceChannel) {
-				if (input.length > 0) {
-					if (youtube.isValidUrl(input[0], consts.hosts.YOUTUBE.name)) {
-						music.play(input[0], message.member.voiceChannel);
-					} else {
-						let url = music.search(input[0]);
-						//music.play(url, message.member.voiceChannel);
+			if (checkCommand(args[0])) {
+				let input = args.splice(1);
+				if (message.member.voiceChannel) {
+					if (input.length > 0) {
+						if (youtube.isValidUrl(input[0], consts.hosts.YOUTUBE.name)) {
+							music.play(input[0], message.member.voiceChannel);
+						} else {
+							let url = music.search(input[0]);
+							//music.play(url, message.member.voiceChannel);
+						}
 					}
+				} else {
+					messages.send(message.channel, texts[config.lang].fields.memberNotInChannel);
 				}
 			} else {
-				messages.noVoiceMessage(message.channel);
+				messages.send(message.channel, texts[config.lang].fields.wrongChannelCommand + ' (' + musicChannel + ')');
 			}
 			break;
 		case 'stop':
-			if (message.member.voiceChannel) {
-				music.stop();
+			if (checkCommand(args[0])) {
+				if (message.member.voiceChannel) {
+					music.stop();
+				} else {
+					messages.send(message.channel, texts[config.lang].fields.memberNotInChannel);
+				}
 			} else {
-				messages.noVoiceMessage(message.channel);
+				messages.send(message.channel, texts[config.lang].fields.wrongChannelCommand + ' (' + musicChannel + ')');
 			}
 			break;
 		case 'resume':
-			if (message.member.voiceChannel) {
-				music.resume();
+			if (checkCommand(args[0])) {
+				if (message.member.voiceChannel) {
+					music.resume();
+				} else {
+					messages.send(message.channel, texts[config.lang].fields.memberNotInChannel);
+				}
 			} else {
-				messages.noVoiceMessage(message.channel);
+				messages.send(message.channel, texts[config.lang].fields.wrongChannelCommand + ' (' + musicChannel + ')');
 			}
 			break;
 		case 'leave':
-			if (message.member.voiceChannel) {
-				music.leave(message.member.voiceChannel);
+			if (checkCommand(args[0])) {
+				if (message.member.voiceChannel) {
+					music.leave(message.member.voiceChannel);
+				} else {
+					messages.send(message.channel, texts[config.lang].fields.memberNotInChannel);
+				}
 			} else {
-				messages.noVoiceMessage(message.channel);
+				messages.send(message.channel, texts[config.lang].fields.wrongChannelCommand + ' (' + musicChannel + ')');
 			}
 			break;
 		case 'say':
-			message.channel.startTyping();
 			let words = args.splice(1);
 			words.join();
-			let phrase = words.toString().replace(new RegExp(",", "g"), " ");
-			message.channel.send(`${phrase} :grimacing:`);
-			message.channel.stopTyping(true);
+			let phrase = words.toString().replace(new RegExp(',', 'g'), ' ');
+			messages.send(phrase + ' :grimacing:');
 			break;
 		case 'info':
-			message.channel.startTyping();
 			let embed = messages.createEmbed(
 				null,
 				chappie.user.username,
@@ -80,26 +95,24 @@ export async function guessCommand(args, message, chappie) {
 			);
 			embed.addField(texts[config.lang].titles.help, texts[config.lang].fields.help);
 			embed.addField(texts[config.lang].titles.lang, texts[config.lang].fields.lang);
-			message.channel.send(embed);
-			message.channel.stopTyping(true);
+			messages.send(embed);
 			break;
 		case 'español':
-			message.channel.startTyping();
 			config.lang = 'spanish';
-			message.channel.send(texts[config.lang].fields.language);
-			message.channel.stopTyping(true);
+			messages.send(message.channel, texts[config.lang].fields.language);
 			break;
 		case 'english':
-			message.channel.startTyping();
 			config.lang = 'english';
-			message.channel.send(texts[config.lang].fields.language);
-			message.channel.stopTyping(true);
+			messages.send(message.channel, texts[config.lang].fields.language);
 			break;
 		default:
-			message.channel.startTyping();
-			message.channel.send(texts[config.lang].fields.wrongInput);
-			message.channel.send(texts[config.lang].footers.info);
-			message.channel.stopTyping(true);
+			messages.send(message.channel, texts[config.lang].fields.wrongInput);
+			messages.send(message.channel, texts[config.lang].footers.info);
 			break;
 	}
+}
+
+// checks usage of member commands (only music for the moment)
+export function checkCommand(command) {
+	return consts.validCommands.MUSIC.indexOf(command) && message.channel.name === musicChannel;
 }
