@@ -1,5 +1,5 @@
 # chappie
-[![pipeline status](https://gitlab.com/edugon/chappie/badges/master/pipeline.svg)](https://gitlab.com/edugon/chappie/commits/master) [![coverage report](https://gitlab.com/edugon/chappie/badges/master/coverage.svg)](https://gitlab.com/edugon/chappie/commits/master)
+> This is a migrated repository, the currently maintained version is located [here](https://gitlab.com/edugon/chappie).
 
 ### About
 Chappie is just a chatbot for discord servers :)
